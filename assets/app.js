@@ -3,21 +3,17 @@ const units = "imperial";
 
 function handleWeatherData(response) {
   console.log("Current Weather: ", response);
-  // Need to grab: UVI, Temperature, Humidity, Wind Speed
-  const uvi = response.current.uvi;
-  const temperature = response.current.temp;
-  const humidity = response.current.humidity;
-  const windSpeed = response.current.wind_speed;
+  const forecast = [];
   const currSummObj = createWeatherSummaryObject(response.current);
-  const day1Summary = createWeatherSummaryObject(response.daily[0]);
-  //   console.log("retObj test: ", createWeatherSummaryObject(response.current));
-  console.log("currSummObj: ", currSummObj);
-  console.log("day1Summary: ", day1Summary);
 
-  console.log("UVI: ", uvi);
-  console.log("Temperature: ", temperature);
-  console.log("Humidity: ", humidity);
-  console.log("Wind Speed: ", windSpeed);
+  for (let i = 0; i < 5; i += 1) {
+    const day = response.daily[i];
+    const daySummary = createWeatherSummaryObject(day);
+    forecast.push(daySummary);
+  }
+
+  console.log("current weather: ", currSummObj);
+  console.log("forecast: ", forecast);
 }
 
 // Respond to button click
@@ -66,6 +62,8 @@ const getCurrentWeather = async (lat, lon) => {
 // Return an object with temp, humidity, windSpeed and uvi
 function createWeatherSummaryObject(daysWeather) {
   const retObj = {};
+  const date = new Date(daysWeather.dt * 1000);
+  retObj["date"] = date.toUTCString();
   retObj["temp"] = daysWeather.temp;
   retObj["humidity"] = daysWeather.humidity;
   retObj["windSpeed"] = daysWeather.wind_speed;
