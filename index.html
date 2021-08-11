@@ -16,11 +16,11 @@
 </head>
 
 <body>
-    <header>
+    <header class="text-center p-3 text-white mx-4 mb-3 mt-3 card">
         <h1>Weather Dashboard</h1>
     </header>
     <div id='main-container' class="container d-flex flex-row w-100">
-        <aside id='aside' class="container flex-shrink-1">
+        <aside id='aside' class="container flex-shrink-1 w-25">
             <h2>Search for a City</h2>
             <form id='search-form'>
                 <input id="city" type="text" class="form-control" placeholder="Enter a City" />
@@ -36,9 +36,11 @@
                 <hr />
                 <h3 class="temp">Temp</h3>
                 <h3 class="humidity">Humidity</h3>
-                <h3 class="uvi">UV Index</h3>
+                <h3><span class="uvi">UV Index</span></h3>
             </div>
-            <h2>5-Day forecast</h2>
+            <div class="container">
+                <h2>5-Day forecast</h2>
+            </div>
             <div id='forecast-container' class="container d-flex flex-row">
                 <div id='day-1' class="card bg-primary flex-grow-1 day-card">
                     <h3 class="date">Date</h3>

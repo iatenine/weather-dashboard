@@ -4,10 +4,10 @@ const searchHistory = [];
 var mainCard;
 
 function handleWeatherData(response) {
-  console.log("Full ressponse: ", response);
   const forecast = [];
   const forecastCards = [];
   const currSummObj = createWeatherSummaryObject(response.current);
+  let uvColor;
 
   for (let i = 0; i < 5; i += 1) {
     const day = response.daily[i];
@@ -18,9 +18,21 @@ function handleWeatherData(response) {
     forecast.push(daySummary);
   }
 
+  console.log("uvi is: ", response.current.uvi);
+  if (response.current.uvi <= 2) {
+    uvColor = "green";
+  } else if (response.current.uvi <= 5) {
+    uvColor = "yellow";
+  } else if (response.current.uvi <= 7) {
+    uvColor = "orange";
+  } else if (response.current.uvi <= 10) {
+    uvColor = "red";
+  }
+
   mainCard.find(".temp").text("Temp: " + currSummObj.temp);
   mainCard.find(".humidity").text("Humidity: " + currSummObj.humidity);
   mainCard.find(".uvi").text("UV Index: " + currSummObj.uvi);
+  mainCard.find(".uvi").css("background-color", uvColor);
 
   for (let i = 0; i < forecast.length; i += 1) {
     const dayCard = forecastCards[i];
@@ -31,9 +43,6 @@ function handleWeatherData(response) {
     dayCard.find(".wind").text("Wind Speed: " + daySummary.windSpeed);
     dayCard.find(".humidity").text("Humidity: " + daySummary.humidity);
   }
-
-  console.log("current weather: ", currSummObj);
-  console.log("forecast: ", forecast);
 }
 
 // Respond to button click
@@ -44,9 +53,10 @@ $(document).ready(function () {
     getLatLon(city);
   });
 
-  searchHistory.forEach(function (city) {
+  searchHistory.forEach(function (city, index) {
     addCityButton(city);
   });
+
   mainCard = $("#main-weather-card");
 });
 
@@ -64,7 +74,6 @@ const getLatLon = async (city) => {
   $.ajax(settings).done(function (response) {
     const lat = response.city.coord.lat;
     const lon = response.city.coord.lon;
-    console.log("adding to history presumably...");
     mainCard
       .find(".header")
       .text(city + " (" + new Date().toDateString() + ")");
@@ -126,8 +135,10 @@ function addCityButton(city) {
   const button = $("<button>").text(city);
   button.click(function (e) {
     e.preventDefault();
-    // Get the city name from the button
-    console.log("city: ", city);
+
+    // Fill in the city name
+    $("#city").val(city);
+    $("#submit").click();
   });
   button.addClass("btn btn-secondary mb-1");
   $("#city-list").append(button);
