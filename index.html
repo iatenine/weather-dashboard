@@ -10,10 +10,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./assets/app.js"></script>
     <title>Weather Dashboard</title>
 </head>
 
-<body class="w-100">
+<body>
     <header>
         <h1>Weather Dashboard</h1>
     </header>
@@ -21,8 +23,8 @@
         <aside class=" container flex-shrink-1">
             <h2>Search for a City</h2>
             <form id='search-form'>
-                <input type="text" placeholder="Enter a City" />
-                <input type="submit" value="Search" />
+                <input id="city" type="text" placeholder="Enter a City" />
+                <button id='submit' class="submit">Hiii </button>
             </form>
             <hr />
             <ul id='search-history'>
@@ -76,8 +78,3 @@
 </body>
 
 </html>
-<!-- Header -->
-<!-- Search form -->
-<!-- List of previous searches -->
-<!-- Jumbotron of current search's weather right now -->
-<!-- 5-day forecast -->
