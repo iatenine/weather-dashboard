@@ -20,7 +20,7 @@
         <h1>Weather Dashboard</h1>
     </header>
     <div id='main-container' class="container d-flex flex-row w-100">
-        <aside class=" container flex-shrink-1">
+        <aside id='aside' class="container flex-shrink-1">
             <h2>Search for a City</h2>
             <form id='search-form'>
                 <input id="city" type="text" placeholder="Enter a City" />
@@ -37,36 +37,39 @@
             </ul>
         </aside>
         <main class="flex-grow-1">
-            <div id='main-weather-card'>
-                <!-- Today's weather -->
+            <div id='main-weather-card' class="container-fluid text-sm-left p-3 bg-info text-white ">
+                <h2>City (Date)</h2>
+                <h3>Temp</h3>
+                <h3>Humidity</h3>
+                <h3>UV Index</h3>
             </div>
             <h2>5-Day forecast</h2>
-            <div id='forecast-container' class="container d-flex flex-row mx-4">
-                <div id='day-1' class="card bg-primary flex-grow-1">
+            <div id='forecast-container' class="container d-flex flex-row">
+                <div id='day-1' class="card bg-info flex-grow-1 day-card">
                     <h3>Date</h3>
                     <h4>Temp</h4>
                     <h4>Wind</h4>
                     <h4>Humidity</h4>
                 </div>
-                <div id='day-1' class="card bg-primary flex-grow-1">
+                <div id='day-2' class="card bg-info flex-grow-1 day-card">
                     <h3>Date</h3>
                     <h4>Temp</h4>
                     <h4>Wind</h4>
                     <h4>Humidity</h4>
                 </div>
-                <div id='day-1' class="card bg-primary flex-grow-1">
+                <div id='day-3' class="card bg-info flex-grow-1 day-card">
                     <h3>Date</h3>
                     <h4>Temp</h4>
                     <h4>Wind</h4>
                     <h4>Humidity</h4>
                 </div>
-                <div id='day-1' class="card bg-primary flex-grow-1">
+                <div id='day-4' class="card bg-info flex-grow-1 day-card">
                     <h3>Date</h3>
                     <h4>Temp</h4>
                     <h4>Wind</h4>
                     <h4>Humidity</h4>
                 </div>
-                <div id='day-1' class="card bg-primary flex-grow-1">
+                <div id='day-5' class="card bg-info flex-grow-1 day-card">
                     <h3>Date</h3>
                     <h4>Temp</h4>
                     <h4>Wind</h4>

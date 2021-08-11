@@ -5,3 +5,11 @@ li {
 #main-container {
   max-width: none;
 }
+
+#aside {
+  width: auto;
+}
+
+.day-card {
+  margin-right: 1rem;
+}
