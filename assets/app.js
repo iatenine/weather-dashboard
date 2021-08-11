@@ -1,5 +1,6 @@
 const apiKey = "c1ecab3291362f3fe61c8735f3bd9de6";
 const units = "imperial";
+const searchHistory = [];
 var mainCard;
 
 function handleWeatherData(response) {
@@ -57,11 +58,14 @@ const getLatLon = async (city) => {
     },
   };
 
-  mainCard.find(".header").text(city + " (" + new Date().toDateString() + ")");
-
   $.ajax(settings).done(function (response) {
     const lat = response.city.coord.lat;
     const lon = response.city.coord.lon;
+    console.log("adding to history presumably...");
+    mainCard
+      .find(".header")
+      .text(city + " (" + new Date().toDateString() + ")");
+    addToHistory(city);
     getCurrentWeather(lat, lon);
   });
 };
@@ -97,3 +101,20 @@ function createWeatherSummaryObject(daysWeather) {
   }
   return retObj;
 }
+
+// Add a city to the search history and localStorage
+function addToHistory(newCity) {
+  if (searchHistory.includes(newCity)) return;
+  searchHistory.push(newCity);
+  localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+}
+
+// Get all cities from localStorage
+function getHistory() {
+  const history = JSON.parse(localStorage.getItem("searchHistory"));
+  history.forEach(function (city) {
+    searchHistory.push(city);
+  });
+}
+
+getHistory();
