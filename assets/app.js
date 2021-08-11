@@ -5,20 +5,31 @@ var mainCard;
 function handleWeatherData(response) {
   console.log("Full ressponse: ", response);
   const forecast = [];
-  // console.log("Forecast: ", forecast);
+  const forecastCards = [];
   const currSummObj = createWeatherSummaryObject(response.current);
-  console.log("Current summary object: ", currSummObj);
 
   for (let i = 0; i < 5; i += 1) {
-    console.log("Day: ", i);
     const day = response.daily[i];
     const daySummary = createWeatherSummaryObject(day);
+    const dayCardId = "day-" + parseInt(i + 1);
+    const dayCard = $("#forecast-container").find(`#${dayCardId}`);
+    forecastCards.push(dayCard);
     forecast.push(daySummary);
   }
 
   mainCard.find(".temp").text("Temp: " + currSummObj.temp);
   mainCard.find(".humidity").text("Humidity: " + currSummObj.humidity);
   mainCard.find(".uvi").text("UV Index: " + currSummObj.uvi);
+
+  for (let i = 0; i < forecast.length; i += 1) {
+    const dayCard = forecastCards[i];
+    const daySummary = forecast[i];
+
+    dayCard.find(".date").text(daySummary.date);
+    dayCard.find(".temp").text("Temp: " + daySummary.temp);
+    dayCard.find(".wind").text("Wind Speed: " + daySummary.windSpeed);
+    dayCard.find(".humidity").text("Humidity: " + daySummary.humidity);
+  }
 
   console.log("current weather: ", currSummObj);
   console.log("forecast: ", forecast);
@@ -75,7 +86,7 @@ const getCurrentWeather = async (lat, lon) => {
 function createWeatherSummaryObject(daysWeather) {
   const retObj = {};
   const date = new Date(daysWeather.dt * 1000);
-  retObj["date"] = date.toUTCString();
+  retObj["date"] = date.toDateString();
   retObj["temp"] = daysWeather.temp;
   retObj["humidity"] = daysWeather.humidity;
   retObj["windSpeed"] = daysWeather.wind_speed;
