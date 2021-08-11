@@ -8,6 +8,11 @@ function handleWeatherData(response) {
   const temperature = response.current.temp;
   const humidity = response.current.humidity;
   const windSpeed = response.current.wind_speed;
+  const currSummObj = createWeatherSummaryObject(response.current);
+  const day1Summary = createWeatherSummaryObject(response.daily[0]);
+  //   console.log("retObj test: ", createWeatherSummaryObject(response.current));
+  console.log("currSummObj: ", currSummObj);
+  console.log("day1Summary: ", day1Summary);
 
   console.log("UVI: ", uvi);
   console.log("Temperature: ", temperature);
@@ -57,3 +62,17 @@ const getCurrentWeather = async (lat, lon) => {
     handleWeatherData(response);
   });
 };
+
+// Return an object with temp, humidity, windSpeed and uvi
+function createWeatherSummaryObject(daysWeather) {
+  const retObj = {};
+  retObj["temp"] = daysWeather.temp;
+  retObj["humidity"] = daysWeather.humidity;
+  retObj["windSpeed"] = daysWeather.wind_speed;
+  retObj["uvi"] = daysWeather.uvi;
+  if (typeof retObj["temp"] === "object") {
+    const avgTemp = (retObj["temp"].min + retObj["temp"].max) / 2;
+    retObj["temp"] = parseFloat(avgTemp.toFixed(2));
+  }
+  return retObj;
+}
