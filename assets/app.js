@@ -1,16 +1,24 @@
 const apiKey = "c1ecab3291362f3fe61c8735f3bd9de6";
 const units = "imperial";
+var mainCard;
 
 function handleWeatherData(response) {
-  console.log("Current Weather: ", response);
+  console.log("Full ressponse: ", response);
   const forecast = [];
+  // console.log("Forecast: ", forecast);
   const currSummObj = createWeatherSummaryObject(response.current);
+  console.log("Current summary object: ", currSummObj);
 
   for (let i = 0; i < 5; i += 1) {
+    console.log("Day: ", i);
     const day = response.daily[i];
     const daySummary = createWeatherSummaryObject(day);
     forecast.push(daySummary);
   }
+
+  mainCard.find(".temp").text("Temp: " + currSummObj.temp);
+  mainCard.find(".humidity").text("Humidity: " + currSummObj.humidity);
+  mainCard.find(".uvi").text("UV Index: " + currSummObj.uvi);
 
   console.log("current weather: ", currSummObj);
   console.log("forecast: ", forecast);
@@ -23,6 +31,8 @@ $(document).ready(function () {
     const city = $("#city").val();
     getLatLon(city);
   });
+
+  mainCard = $("#main-weather-card");
 });
 
 // Convert a city name to a latitude and longitude
@@ -35,6 +45,8 @@ const getLatLon = async (city) => {
       console.error("Error, double check the city name entered and try again");
     },
   };
+
+  mainCard.find(".header").text(city + " (" + new Date().toDateString() + ")");
 
   $.ajax(settings).done(function (response) {
     const lat = response.city.coord.lat;

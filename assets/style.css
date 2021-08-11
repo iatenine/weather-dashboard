@@ -1,3 +1,7 @@
+:root {
+  --secondary-color: lightgrey;
+}
+
 li {
   list-style-type: none;
 }
@@ -11,5 +15,11 @@ li {
 }
 
 .day-card {
+  color: white;
   margin-right: 1rem;
+}
+
+.previous-search {
+  width: 100%;
+  background-color: var(--secondary-color);
 }
