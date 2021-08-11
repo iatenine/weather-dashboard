@@ -44,6 +44,9 @@ $(document).ready(function () {
     getLatLon(city);
   });
 
+  searchHistory.forEach(function (city) {
+    addCityButton(city);
+  });
   mainCard = $("#main-weather-card");
 });
 
@@ -105,6 +108,7 @@ function createWeatherSummaryObject(daysWeather) {
 // Add a city to the search history and localStorage
 function addToHistory(newCity) {
   if (searchHistory.includes(newCity)) return;
+  addCityButton(newCity);
   searchHistory.push(newCity);
   localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
 }
@@ -115,6 +119,18 @@ function getHistory() {
   history.forEach(function (city) {
     searchHistory.push(city);
   });
+}
+
+// Add a button to the list of cities
+function addCityButton(city) {
+  const button = $("<button>").text(city);
+  button.click(function (e) {
+    e.preventDefault();
+    // Get the city name from the button
+    console.log("city: ", city);
+  });
+  button.addClass("btn btn-secondary mb-1");
+  $("#city-list").append(button);
 }
 
 getHistory();
