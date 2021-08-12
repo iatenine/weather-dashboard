@@ -9,6 +9,9 @@ function handleWeatherData(response) {
   const currSummObj = createWeatherSummaryObject(response.current);
   let uvColor;
 
+  console.log("id: ", currSummObj.descId);
+  console.log("curr summ obj: ", currSummObj.description);
+
   for (let i = 0; i < 5; i += 1) {
     const day = response.daily[i];
     const daySummary = createWeatherSummaryObject(day);
@@ -106,6 +109,8 @@ function createWeatherSummaryObject(daysWeather) {
   retObj["temp"] = daysWeather.temp;
   retObj["humidity"] = daysWeather.humidity;
   retObj["windSpeed"] = daysWeather.wind_speed;
+  retObj["descId"] = daysWeather.weather[0].id;
+  retObj["description"] = daysWeather.weather[0].description;
   retObj["uvi"] = daysWeather.uvi;
   if (typeof retObj["temp"] === "object") {
     const avgTemp = (retObj["temp"].min + retObj["temp"].max) / 2;
