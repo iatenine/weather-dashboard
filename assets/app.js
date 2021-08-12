@@ -1,6 +1,8 @@
 const apiKey = "c1ecab3291362f3fe61c8735f3bd9de6";
 const units = "imperial";
 const searchHistory = [];
+const iconPathPrefix = "https://openweathermap.org/img/wn/";
+const iconPathSuffix = "@2x.png";
 var mainCard;
 
 function handleWeatherData(response) {
@@ -9,7 +11,7 @@ function handleWeatherData(response) {
   const currSummObj = createWeatherSummaryObject(response.current);
   let uvColor;
 
-  console.log("id: ", currSummObj.descId);
+  console.log("id: ", currSummObj.icon);
   console.log("curr summ obj: ", currSummObj.description);
 
   for (let i = 0; i < 5; i += 1) {
@@ -32,6 +34,10 @@ function handleWeatherData(response) {
     uvColor = "red";
   }
 
+  mainCard
+    .find(".icon")
+    .prop("src", iconPathPrefix + currSummObj.icon + iconPathSuffix);
+  mainCard.find(".description").text(currSummObj.description);
   mainCard.find(".temp").text("Temp: " + currSummObj.temp);
   mainCard.find(".humidity").text("Humidity: " + currSummObj.humidity);
   mainCard.find(".uvi").text("UV Index: " + currSummObj.uvi);
@@ -41,6 +47,10 @@ function handleWeatherData(response) {
     const dayCard = forecastCards[i];
     const daySummary = forecast[i];
 
+    dayCard
+      .find(".icon")
+      .prop("src", iconPathPrefix + daySummary.icon + iconPathSuffix);
+    dayCard.find(".description").text(daySummary.description);
     dayCard.find(".date").text(daySummary.date);
     dayCard.find(".temp").text("Temp: " + daySummary.temp);
     dayCard.find(".wind").text("Wind Speed: " + daySummary.windSpeed);
@@ -109,7 +119,7 @@ function createWeatherSummaryObject(daysWeather) {
   retObj["temp"] = daysWeather.temp;
   retObj["humidity"] = daysWeather.humidity;
   retObj["windSpeed"] = daysWeather.wind_speed;
-  retObj["descId"] = daysWeather.weather[0].id;
+  retObj["icon"] = daysWeather.weather[0].icon;
   retObj["description"] = daysWeather.weather[0].description;
   retObj["uvi"] = daysWeather.uvi;
   if (typeof retObj["temp"] === "object") {

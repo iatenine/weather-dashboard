@@ -1,4 +1,4 @@
-header{
+header {
   background-image: linear-gradient(to right, blue, grey);
 }
 
@@ -27,4 +27,9 @@ button {
 .day-card {
   color: white;
   margin-right: 1rem;
+}
+
+.icon {
+  max-width: 64px;
+  max-height: 64px;
 }
