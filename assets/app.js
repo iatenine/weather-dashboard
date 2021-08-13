@@ -10,13 +10,13 @@ function enterDefaults() {
   const forecastCards = $("#forecast-container");
   let newHtml = "";
 
-  mainCard.html(`<h2 class="header">City (Date)</h2>
+  mainCard.html(`<h2 class="header">Enter a City</h2>
                 <hr />
                 <img class="icon" src=''></img>
                 <h3 class="description"></h3>
-                <h3 class="temp">Temp</h3>
-                <h3 class="humidity">Humidity</h3>
-                <h3><span class="uvi">UV Index</span></h3>`);
+                <h3 class="temp">Temp: --</h3>
+                <h3 class="humidity">Humidity: --</h3>
+                <h3><span class="uvi">UV Index: --</span></h3>`);
 
   for (let x = 1; x <= 5; x += 1) {
     newHtml += `<div id="day-${x}" class="card bg-primary flex-grow-1 day-card">
