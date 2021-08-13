@@ -5,10 +5,18 @@ const iconPathPrefix = "https://openweathermap.org/img/wn/";
 const iconPathSuffix = "@2x.png";
 var mainCard;
 
-function enterDefaults(jqElement) {
-  const mainCard = $(".card-main");
+function enterDefaults() {
+  const mainCard = $("#main-weather-card");
   const forecastCards = $("#forecast-container");
   let newHtml = "";
+
+  mainCard.html(`<h2 class="header">City (Date)</h2>
+                <hr />
+                <img class="icon" src=''></img>
+                <h3 class="description"></h3>
+                <h3 class="temp">Temp</h3>
+                <h3 class="humidity">Humidity</h3>
+                <h3><span class="uvi">UV Index</span></h3>`);
 
   for (let x = 1; x <= 5; x += 1) {
     newHtml += `<div id="day-${x}" class="card bg-primary flex-grow-1 day-card">
@@ -90,8 +98,7 @@ $(document).ready(function () {
   });
 
   mainCard = $("#main-weather-card");
-  enterDefaults($("#forecast-container"));
-  // enterDefaults($("#forecast-container", 2));
+  enterDefaults();
 });
 
 // Convert a city name to a latitude and longitude
