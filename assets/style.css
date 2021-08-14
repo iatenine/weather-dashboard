@@ -43,6 +43,26 @@ button {
   max-height: 64px;
 }
 
+/* jQuery Autocomplete adjustmentes */
+.ui-autocomplete {
+  width: 22%;
+  max-width: 720px;
+  max-height: 200px;
+  border: solid 1px #ccc;
+  background-color: lightgray;
+  overflow-y: hidden;
+}
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
+.ui-menu-item {
+  font-size: 18px;
+  text-align: left;
+  margin-left: 0;
+  padding: 10px;
+}
+
 @media screen and (max-width: 767px) {
   #main-container {
     flex-direction: column !important;
