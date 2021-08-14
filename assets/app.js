@@ -382,26 +382,6 @@ function handleWeatherData(response) {
   }
 }
 
-// Respond to button click
-$(document).ready(function () {
-  $("#submit").click(function (e) {
-    e.preventDefault();
-    const city = $("#city").val();
-    getLatLon(city);
-  });
-
-  searchHistory.forEach(function (city, index) {
-    addCityButton(city);
-  });
-
-  $("#city").autocomplete({
-    source: cityList.concat(searchHistory),
-  });
-  $("#city").html("hello");
-  mainCard = $("#main-weather-card");
-  enterDefaults();
-});
-
 const setErrorMsg = (msg) => {
   if (!msg) {
     $("#error-msg").css("display", "none");
@@ -493,15 +473,26 @@ function createWeatherSummaryObject(daysWeather) {
 
 // Add a city to the search history and localStorage
 function addToHistory(newCity) {
+  $("#clear").removeClass("disabled");
   if (searchHistory.includes(newCity)) return;
   addCityButton(newCity);
   searchHistory.push(newCity);
   localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
 }
 
+function clearHistory() {
+  $("#clear").addClass("disabled");
+  $("#city-list").empty();
+  while (searchHistory.length > 0) {
+    searchHistory.pop();
+  }
+  localStorage.removeItem("searchHistory");
+}
+
 // Get all cities from localStorage
 function getHistory() {
   const history = JSON.parse(localStorage.getItem("searchHistory"));
+  if (!history) return;
   history.forEach(function (city) {
     searchHistory.push(city);
   });
@@ -517,8 +508,37 @@ function addCityButton(city) {
     $("#city").val(city);
     $("#submit").click();
   });
-  button.addClass("btn btn-secondary mb-1");
+  button.addClass("btn btn-secondary mb-1 city-btn");
   $("#city-list").append(button);
 }
+
+// Initialize the page
+$(document).ready(function () {
+  const submitButton = $("#submit");
+  const clearButton = $("#clear");
+  const cityInput = $("#city");
+  mainCard = $("#main-weather-card");
+
+  submitButton.click(function (e) {
+    e.preventDefault();
+    const city = $("#city").val();
+    getLatLon(city);
+  });
+
+  clearButton.click(function (e) {
+    e.preventDefault();
+    clearHistory();
+  });
+
+  searchHistory.forEach(function (city, index) {
+    clearButton.removeClass("disabled");
+    addCityButton(city);
+  });
+
+  cityInput.autocomplete({
+    source: cityList.concat(searchHistory),
+  });
+  enterDefaults();
+});
 
 getHistory();
