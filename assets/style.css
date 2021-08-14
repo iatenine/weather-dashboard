@@ -13,6 +13,7 @@ button {
 
 #error-msg {
   display: none;
+  margin-top: 1rem;
 }
 
 #main-weather-card {
