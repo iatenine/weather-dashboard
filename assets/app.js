@@ -101,14 +101,34 @@ $(document).ready(function () {
   enterDefaults();
 });
 
+const setErrorMsg = (msg) => {
+  if (!msg) {
+    $("#error-msg").css("display", "none");
+    return;
+  }
+
+  $("#error-msg").text(msg);
+  $("#error-msg").css("display", "block");
+};
+
 // Convert a city name to a latitude and longitude
 const getLatLon = async (city) => {
   const settings = {
     url: `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`,
     method: "GET",
     timeout: 0,
-    error: function () {
-      console.error("Error, double check the city name entered and try again");
+    error: function (err) {
+      if (err.status === 404) {
+        setErrorMsg(`No results found`);
+        return;
+      }
+      setErrorMsg(
+        "Something went wrong. Full details printed to browser console"
+      );
+      console.error(
+        "Please inform the software maintainer of this error: ",
+        err
+      );
     },
   };
 
@@ -130,11 +150,24 @@ const getCurrentWeather = async (lat, lon) => {
     method: "GET",
     timeout: 0,
     error: function () {
-      console.error("Error, double check the city name entered and try again");
+      if (err.status === 404) {
+        setErrorMsg(
+          `Lat/Lon values for city invalid. Please inform the software maintainer`
+        );
+        return;
+      }
+      setErrorMsg(
+        "Something went wrong. Full details printed to browser console"
+      );
+      console.error(
+        "Please inform the software maintainer of this error: ",
+        err
+      );
     },
   };
 
   $.ajax(settings).done(function (response) {
+    setErrorMsg(null);
     handleWeatherData(response);
   });
 };

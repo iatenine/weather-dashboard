@@ -11,6 +11,10 @@ button {
   width: 100%;
 }
 
+#error-msg {
+  display: none;
+}
+
 #main-weather-card {
   width: 98%;
   margin: 0 auto;
