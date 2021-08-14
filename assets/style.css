@@ -55,11 +55,13 @@ button {
   #main-weather-card {
     width: 100% !important;
     margin-top: 1rem;
+    margin-bottom: 1rem !important;
   }
 
-  #forecast-label {
+  .title {
     margin-left: 0 !important;
     margin-right: 0 !important;
+    margin-top: 0 !important;
   }
 
   #forecast-container {
