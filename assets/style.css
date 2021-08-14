@@ -1,4 +1,4 @@
-header {
+.title {
   background-image: linear-gradient(to right, blue, grey);
 }
 
@@ -50,5 +50,25 @@ button {
 
   #aside {
     width: 100% !important;
+  }
+
+  #main-weather-card {
+    width: 100% !important;
+    margin-top: 1rem;
+  }
+
+  #forecast-label {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  #forecast-container {
+    flex-direction: column !important;
+    margin-left: 0 !important;
+  }
+
+  .day-card {
+    margin-right: 0 !important;
+    margin-bottom: 1rem !important;
   }
 }
