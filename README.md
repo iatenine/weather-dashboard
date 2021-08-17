@@ -15,6 +15,15 @@ Desktop Layout
 Mobile Layout
 
 ![Mobile View](assets/mobile-view.png)
+
+## Technologies Used
+ - Javascript
+ - JQuery
+ - Bootstrap
+ - HTML
+ - CSS
+ - OpenWeather One Call API
+
 ## APIs
 
 [Open Weather OneCall API](https://openweathermap.org/api/one-call-api)
