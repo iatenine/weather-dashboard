@@ -16,18 +16,8 @@ button {
   margin-top: 1rem;
 }
 
-#main-weather-card,
-#forecast-label {
-  width: 98%;
-  margin: 0 auto;
-}
-
 #main-container {
   max-width: none;
-}
-
-#forecast-container {
-  margin-left: 0.75rem;
 }
 
 #aside {
@@ -36,7 +26,16 @@ button {
 
 .day-card {
   color: white;
-  margin-right: 1rem;
+  margin-right: 0.25rem !important;
+  margin-left: 0.25rem !important;
+}
+
+#day-1 {
+  margin-left: 0 !important;
+}
+
+#day-5 {
+  margin-right: 0 !important;
 }
 
 .icon {
