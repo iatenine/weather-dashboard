@@ -16,7 +16,8 @@ button {
   margin-top: 1rem;
 }
 
-#main-weather-card {
+#main-weather-card,
+#forecast-label {
   width: 98%;
   margin: 0 auto;
 }
