@@ -25,8 +25,20 @@
             <h2>Search for a City</h2>
             <form id='search-form' class="ui-widget">
                 <input id="city" type="text" class="form-control" placeholder="Enter a City" />
+
+                <div class="d-flex justify-content-around">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="unit" id="celsius" value="metric"
+                            checked="checked" />
+                        <label class="form-check-label" for="inlineCheckbox1">Metric</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="unit" id="fahrenheit" value="imperial" />
+                        <label class="form-check-label" for="inlineCheckbox2">Imperial</label>
+                    </div>
+                </div>
+                <button id='clear' class="btn btn-secondary disabled mb-1">Clear History</button>
                 <button id='submit' class="btn btn-primary mb-1">Search</button>
-                <button id='clear' class="btn btn-secondary disabled">Clear History</button>
 
                 <div id="error-msg" class="alert alert-danger">
                     <!-- Error message will be generated here -->
@@ -40,7 +52,7 @@
             <div id='main-weather-card' class="container-fluid card text-sm-left p-3 bg-primary text-white ">
                 <!-- Generated dynamically-->
             </div>
-            <div class="title text-center p-3 text-white mb-3 mt-3 card container" id="forecast-label">
+            <div class="title text-center p-3 text-white mb-3 mt-3 card" id="forecast-label">
                 <h2>5-Day forecast</h2>
             </div>
             <div id='forecast-container' class="d-flex flex-row">

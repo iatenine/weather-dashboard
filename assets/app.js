@@ -1,9 +1,9 @@
 const apiKey = "c1ecab3291362f3fe61c8735f3bd9de6";
-const units = "imperial";
+let units = "metric";
 const searchHistory = [];
 const iconPathPrefix = "https://openweathermap.org/img/wn/";
 const iconPathSuffix = "@2x.png";
-// All US cities with a population greater than 100,000
+// Provide 250 most populated cities in the US by default
 const cityList = [
   "New York, New York",
   "Los Angeles, California",
@@ -358,9 +358,9 @@ function handleWeatherData(response) {
   mainCard
     .find(".icon")
     .prop("src", iconPathPrefix + currSummObj.icon + iconPathSuffix);
-  mainCard.find(".description").text(currSummObj.description);
-  mainCard.find(".temp").text("Temp: " + currSummObj.temp);
-  mainCard.find(".humidity").text("Humidity: " + currSummObj.humidity);
+  mainCard.find(".description").text(currSummObj.description + "\n");
+  mainCard.find(".temp").text("Temp: " + currSummObj.temp + getDegree());
+  mainCard.find(".humidity").text("Humidity: " + currSummObj.humidity + "%");
   mainCard.find(".uvi").text("UV Index: " + currSummObj.uvi);
   mainCard.find(".uvi").css("background-color", uvColor);
 
@@ -373,10 +373,22 @@ function handleWeatherData(response) {
       .prop("src", iconPathPrefix + daySummary.icon + iconPathSuffix);
     dayCard.find(".description").text(daySummary.description);
     dayCard.find(".date").text(daySummary.date);
-    dayCard.find(".temp").text("Temp: " + daySummary.temp);
-    dayCard.find(".wind").text("Wind Speed: " + daySummary.windSpeed);
-    dayCard.find(".humidity").text("Humidity: " + daySummary.humidity);
+    dayCard.find(".temp").text("Temp: " + daySummary.temp + getDegree());
+    dayCard
+      .find(".wind")
+      .text("Wind Speed: " + daySummary.windSpeed + getWindUnit());
+    dayCard.find(".humidity").text("Humidity: " + daySummary.humidity + "%");
   }
+}
+
+function getDegree() {
+  if (units === "imperial") return "°F";
+  return "°C";
+}
+
+function getWindUnit() {
+  if (units === "imperial") return "mph";
+  return "m/s";
 }
 
 const setErrorMsg = (msg) => {
@@ -392,7 +404,7 @@ const setErrorMsg = (msg) => {
 // Convert a city name to a latitude and longitude
 const getLatLon = async (city) => {
   const settings = {
-    url: `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`,
+    url: `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${units}&appid=${apiKey}`,
     method: "GET",
     timeout: 0,
     error: function (err) {
@@ -515,6 +527,15 @@ $(document).ready(function () {
   const clearButton = $("#clear");
   const cityInput = $("#city");
   mainCard = $("#main-weather-card");
+
+  // Add event listeners to radio buttons
+  $("#celsius").click(function () {
+    units = "metric";
+  });
+
+  $("#fahrenheit").click(function () {
+    units = "imperial";
+  });
 
   submitButton.click(function (e) {
     e.preventDefault();

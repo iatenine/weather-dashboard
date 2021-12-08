@@ -22,6 +22,11 @@ button {
 
 #aside {
   width: auto;
+  max-width: 25%;
+}
+
+.description {
+  height: 4rem;
 }
 
 .day-card {
@@ -70,6 +75,7 @@ button {
 
   #aside {
     width: 100% !important;
+    max-width: none !important;
   }
 
   #main-weather-card {
