@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="./assets/style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="./assets/consts.js"></script>
+    <script src="./assets/utils.js"></script>
     <script src="./assets/app.js"></script>
     <title>Weather Dashboard</title>
 </head>
@@ -23,7 +25,7 @@
     <div id='main-container' class="container d-flex flex-row w-100">
         <aside id='aside' class="container flex-shrink-1 w-25">
             <h2>Search for a City</h2>
-            <form id='search-form' class="ui-widget">
+            <div id='search-form' class="ui-widget">
                 <input id="city" type="text" class="form-control" placeholder="Enter a City" />
 
                 <div class="d-flex justify-content-around">
@@ -37,13 +39,13 @@
                         <label class="form-check-label" for="inlineCheckbox2">Imperial</label>
                     </div>
                 </div>
-                <button id='clear' class="btn btn-secondary disabled mb-1">Clear History</button>
                 <button id='submit' class="btn btn-primary mb-1">Search</button>
+                <button id='clear' class="btn btn-secondary disabled mb-1">Clear History</button>
 
                 <div id="error-msg" class="alert alert-danger">
                     <!-- Error message will be generated here -->
                 </div>
-            </form>
+            </div>
             <hr />
             <div id='city-list'>
             </div>
